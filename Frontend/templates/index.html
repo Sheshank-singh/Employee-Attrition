@@ -5,131 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Attrition Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Employee Attrition Prediction</h1>
-        <form action="/predict" method="POST">
-            
+        <div class="page-header">
+            <h1><i class="fas fa-users-gear"></i> Employee Attrition Prediction</h1>
+            <p class="subtitle">Enter employee information to predict likelihood of attrition</p>
+        </div>
+
+        <form action="/predict" method="POST" class="prediction-form">
+            <!-- Personal Information Section -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user section-icon"></i>Employee Information
+                </h2>
+                <div class="form-grid">
             <div class="form-group">
                 <label for="Age">Age</label>
-                <input type="number" name="Age" id="Age" placeholder="e.g. 29" min="18" max="60" required>
+                <input type="number" name="Age" id="Age" placeholder="Enter age" min="18" max="60" required>
+                <div class="help-text">Employee's age (18-60 years)</div>
             </div>
 
-            <div class="form-group">
-                <label for="DistanceFromHome">Distance From Home in kms</label>
-                <input type="number" name="DistanceFromHome" id="DistanceFromHome" placeholder="e.g. 10" min="0" max="100" required>
+                    <div class="form-group">
+                        <label for="MaritalStatus">Marital Status</label>
+                        <select name="MaritalStatus" id="MaritalStatus" required>
+                            <option value="">Select status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DistanceFromHome">Distance From Home (km)</label>
+                        <input type="number" name="DistanceFromHome" id="DistanceFromHome" placeholder="Enter distance" min="0" max="100" required>
+                        <div class="help-text">Distance from work to home in kilometers</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="EnvironmentSatisfaction">Environment Satisfaction (1-4)</label>
-                <input type="number" name="EnvironmentSatisfaction" id="EnvironmentSatisfaction" placeholder="1=Low, 4=High" min="1" max="4" required>
+            <!-- Job Details Section -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase section-icon"></i>Job Information
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="JobRole">Job Role</label>
+                        <select name="JobRole" id="JobRole" required>
+                            <option value="">Select role</option>
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="Laboratory Technician">Laboratory Technician</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Manufacturing Director">Manufacturing Director</option>
+                            <option value="Research Director">Research Director</option>
+                            <option value="Research Scientist">Research Scientist</option>
+                            <option value="Sales Executive">Sales Executive</option>
+                            <option value="Sales Representative">Sales Representative</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="JobLevel">Job Level</label>
+                        <input type="number" name="JobLevel" id="JobLevel" placeholder="Enter level" min="1" max="5" required>
+                        <div class="help-text">Position level from 1 (Entry) to 5 (Executive)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MonthlyIncome">Monthly Income (₹)</label>
+                        <input type="number" name="MonthlyIncome" id="MonthlyIncome" placeholder="Enter monthly income" min="1" max="200000" required>
+                        <div class="help-text">Monthly salary in Indian Rupees</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="StockOptionLevel">Stock Option Level</label>
+                        <input type="number" name="StockOptionLevel" id="StockOptionLevel" placeholder="Enter stock level" min="0" max="3" required>
+                        <div class="help-text">Stock options level (0-3)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="BusinessTravel">Business Travel</label>
+                        <select name="BusinessTravel" id="BusinessTravel" required>
+                            <option value="">Select frequency</option>
+                            <option value="Non-Travel">No Travel</option>
+                            <option value="Travel_Rarely">Travel Rarely</option>
+                            <option value="Travel_Frequently">Travel Frequently</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="OverTime">Over Time</label>
+                        <select name="OverTime" id="OverTime" required>
+                            <option value="">Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <div class="help-text">Does the employee work overtime?</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="JobInvolvement">Job Involvement (1-4)</label>
-                <input type="number" name="JobInvolvement" id="JobInvolvement" placeholder="e.g. 3" min="1" max="4" required>
+            <!-- Experience Section -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-clock-rotate-left section-icon"></i>Experience
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="TotalWorkingYears">Total Working Years</label>
+                        <input type="number" name="TotalWorkingYears" id="TotalWorkingYears" placeholder="Enter total years" min="0" max="40" required>
+                        <div class="help-text">Total years of professional experience</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YearsAtCompany">Years at Company</label>
+                        <input type="number" name="YearsAtCompany" id="YearsAtCompany" placeholder="Enter years at company" min="0" max="40" required>
+                        <div class="help-text">Duration of employment at current company</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YearsInCurrentRole">Years in Current Role</label>
+                        <input type="number" name="YearsInCurrentRole" id="YearsInCurrentRole" placeholder="Enter years in role" min="0" max="20" required>
+                        <div class="help-text">Time in current position</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YearsWithCurrManager">Years with Current Manager</label>
+                        <input type="number" name="YearsWithCurrManager" id="YearsWithCurrManager" placeholder="Enter years with manager" min="0" max="20" required>
+                        <div class="help-text">Duration working under current manager</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="JobLevel">Job Level (1-5)</label>
-                <input type="number" name="JobLevel" id="JobLevel" placeholder="e.g. 2" min="1" max="5" required>
+            <!-- Satisfaction Metrics Section -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star section-icon"></i>Satisfaction Metrics
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="JobSatisfaction">Job Satisfaction</label>
+                        <input type="number" name="JobSatisfaction" id="JobSatisfaction" placeholder="Rate from 1-4" min="1" max="4" required>
+                        <div class="help-text">Rate from 1 (Low) to 4 (High)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EnvironmentSatisfaction">Environment Satisfaction</label>
+                        <input type="number" name="EnvironmentSatisfaction" id="EnvironmentSatisfaction" placeholder="Rate from 1-4" min="1" max="4" required>
+                        <div class="help-text">Rate from 1 (Low) to 4 (High)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="WorkLifeBalance">Work Life Balance</label>
+                        <input type="number" name="WorkLifeBalance" id="WorkLifeBalance" placeholder="Rate from 1-4" min="1" max="4" required>
+                        <div class="help-text">Rate from 1 (Poor) to 4 (Excellent)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="JobInvolvement">Job Involvement</label>
+                        <input type="number" name="JobInvolvement" id="JobInvolvement" placeholder="Rate from 1-4" min="1" max="4" required>
+                        <div class="help-text">Rate from 1 (Low) to 4 (High)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EducationField">Education Field</label>
+                        <select name="EducationField" id="EducationField" required>
+                            <option value="">Select field</option>
+                            <option value="Life Sciences">Life Sciences</option>
+                            <option value="Medical">Medical</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Technical Degree">Technical Degree</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="JobSatisfaction">Job Satisfaction (1-4)</label>
-                <input type="number" name="JobSatisfaction" id="JobSatisfaction" placeholder="1=Low, 4=High" min="1" max="4" required>
-            </div>
-
-            <div class="form-group">
-                <label for="MonthlyIncome">Monthly Income (₹)</label>
-                <input type="number" name="MonthlyIncome" id="MonthlyIncome" placeholder="e.g. 25000" min="1" max="200000" required>
-            </div>
-
-            <div class="form-group">
-                <label for="StockOptionLevel">Stock Option Level (0–3)</label>
-                <input type="number" name="StockOptionLevel" id="StockOptionLevel"  placeholder="e.g. 1" min="0" max="3" required>
-            </div>
-
-            <div class="form-group">
-                <label for="TotalWorkingYears">Total Working Years</label>
-                <input type="number" name="TotalWorkingYears" id="TotalWorkingYears"  placeholder="e.g. 7" min="0" max="40" required>
-            </div>
-
-            <div class="form-group">
-                <label for="WorkLifeBalance">Work Life Balance (1–4)</label>
-                <input type="number" name="WorkLifeBalance" id="WorkLifeBalance" placeholder="1=Bad, 4=Excellent" min="1" max="4"  required>
-            </div>
-
-            <div class="form-group">
-                <label for="YearsAtCompany">Years At Company</label>
-                <input type="number" name="YearsAtCompany" id="YearsAtCompany" placeholder="e.g. 5" min="0" max="40" required>
-            </div>
-
-            <div class="form-group">
-                <label for="YearsInCurrentRole">Years In Current Role</label>
-                <input type="number" name="YearsInCurrentRole" id="YearsInCurrentRole" placeholder="e.g. 3" min="0" max="20" required>
-            </div>
-
-            <div class="form-group">
-                <label for="YearsWithCurrManager">Years With Current Manager</label>
-                <input type="number" name="YearsWithCurrManager" id="YearsWithCurrManager" placeholder="e.g. 2" min="0" max="20" required>
-            </div>
-
-            <div class="form-group">
-                <label for="OverTime">Over Time</label>
-                <select name="OverTime" id="OverTime">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="JobRole">Job Role</label>
-                <select name="JobRole" id="JobRole">
-                    <option value="Human Resources">Human Resources</option>
-                    <option value="Laboratory Technician">Laboratory Technician</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Manufacturing Director">Manufacturing Director</option>
-                    <option value="Research Director">Research Director</option>
-                    <option value="Research Scientist">Research Scientist</option>
-                    <option value="Sales Executive">Sales Executive</option>
-                    <option value="Sales Representative">Sales Representative</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="MaritalStatus">Marital Status</label>
-                <select name="MaritalStatus" id="MaritalStatus">
-                    <option value="Married">Married</option>
-                    <option value="Single">Single</option>
-                    <option value="Divorced">Divorced</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="BusinessTravel">Business Travel</label>
-                <select name="BusinessTravel" id="BusinessTravel">
-                    <option value="Travel_Frequently">Travel Frequently</option>
-                    <option value="Travel_Rarely">Travel Rarely</option>
-                    <option value="Non-Travel">Non-Travel</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="EducationField">Education Field</label>
-                <select name="EducationField" id="EducationField">
-                    <option value="Life Sciences">Life Sciences</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Technical Degree">Technical Degree</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <div class="full-width">
-                <button type="submit">Predict</button>
+            <div class="submit-section">
+                <button type="submit">
+                    <i class="fas fa-chart-line"></i> Predict Attrition
+                </button>
             </div>
         </form>
     </div>
