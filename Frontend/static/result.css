@@ -1,6 +1,10 @@
 /* ===========================
    General Page Setup
 =========================== */
+html {
+    height: auto;
+    min-height: 100vh;
+}
 body.result-page {
     font-family: "Poppins", sans-serif;
     background: linear-gradient(135deg, #f0f7ff, #ffffff);
@@ -10,7 +14,7 @@ body.result-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* ===========================
@@ -101,6 +105,52 @@ body.result-page {
 
 .result p.probability::before {
     content: "⚙️ ";
+}
+
+/* ===========================
+   Analysis Section
+=========================== */
+.analysis-section {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.analysis-section h2 {
+    font-size: 1.4rem;
+    color: #2b59c3;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+.reasons, .suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reason-item, .suggestion-item {
+    background-color: #f8faff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 3px 10px rgba(43, 89, 195, 0.1);
+}
+
+.reason, .suggestion {
+    margin: 0;
+    font-size: 1rem;
+    color: #4b4b4b;
+    line-height: 1.5;
+}
+
+.reason {
+    border-left: 4px solid #2b59c3;
+    padding-left: 12px;
+}
+
+.suggestion {
+    border-left: 4px solid #28a745;
+    padding-left: 12px;
 }
 
 /* ===========================

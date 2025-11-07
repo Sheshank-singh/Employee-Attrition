@@ -12,6 +12,27 @@
     <h1>Prediction Result</h1>
     <p class="prediction">{{ prediction }}</p>
     <p class="probability">Probability of Attrition: {{ probability }}</p>
+    
+    <div class="analysis-section">
+      <h2>Key Factors</h2>
+      <div class="reasons">
+        {% for reason in reasons %}
+        <div class="reason-item">
+          <p class="reason">📊 {{ reason }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      
+      <h2>HR Recommendations</h2>
+      <div class="suggestions">
+        {% for suggestion in suggestions %}
+        <div class="suggestion-item">
+          <p class="suggestion">💡 {{ suggestion }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    
     <a href="/">🔙 Back</a>
   </div>
 </body>
