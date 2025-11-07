@@ -1,34 +1,41 @@
 /* ===========================
-   General Page Setup
+   General Page Setup & Typography
 =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 html {
     height: auto;
     min-height: 100vh;
 }
+
 body.result-page {
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #f0f7ff, #ffffff);
-    color: #333;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f6f9fc, #ffffff);
+    color: #2d3748;
     margin: 0;
-    padding: 0;
+    padding: 2rem 1rem;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    align-items: flex-start;
 }
 
 /* ===========================
-   Result Container
+   Container & Cards
 =========================== */
 .container.result {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
-    padding: 50px 40px;
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    margin: 2rem auto;
     animation: fadeIn 0.8s ease-in-out;
+}
+
+.section-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
 }
 
 /* Subtle entrance animation */
@@ -45,136 +52,230 @@ body.result-page {
 }
 
 /* ===========================
-   Headings
+   Header Section
 =========================== */
-.container.result h1 {
-    font-size: 2rem;
+.header-section h1 {
+    font-size: 2.2rem;
     font-weight: 700;
-    color: #2b59c3;
-    margin-bottom: 25px;
-    letter-spacing: 0.5px;
+    color: #2d3748;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.prediction-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.prediction-header {
+    background: #4a5568;
+    color: #ffffff;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.prediction-content {
+    padding: 2rem;
+    text-align: center;
 }
 
 /* ===========================
-   Prediction Text
+   Prediction Result
 =========================== */
-.result p.prediction {
-    font-size: 1.8rem;
-    color: #1e272e;
-    margin-bottom: 15px;
-    font-weight: 600;
+.prediction {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
 }
 
-.result p.probability {
+.prediction.positive {
+    color: #2f855a;
+    background: #f0fff4;
+}
+
+.prediction.negative {
+    color: #c53030;
+    background: #fff5f5;
+}
+
+/* ===========================
+   Probability Gauge
+=========================== */
+.probability-gauge {
+    width: 100%;
+    height: 8px;
+    background: #edf2f7;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #48bb78, #2b6cb0);
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}
+
+.probability {
     font-size: 1.1rem;
-    color: #4b4b4b;
-    background-color: #f8faff;
-    display: inline-block;
-    padding: 8px 18px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    box-shadow: 0px 3px 10px rgba(43, 89, 195, 0.1);
+    color: #4a5568;
+    margin: 0.5rem 0;
+    font-weight: 500;
 }
 
 /* ===========================
    Back Button
 =========================== */
-.result a {
-    display: inline-block;
-    background-color: #2b59c3;
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #4a5568;
     color: white;
-    padding: 12px 25px;
+    padding: 1rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 500;
     transition: all 0.3s ease;
+    margin: 1rem auto;
+    display: block;
+    width: fit-content;
 }
 
-.result a:hover {
-    background-color: #2249a0;
+.back-button:hover {
+    background: #2d3748;
     transform: translateY(-2px);
-}
-
-/* ===========================
-   Optional Icons
-=========================== */
-.result p.prediction::before {
-    content: "📊 ";
-}
-
-.result p.probability::before {
-    content: "⚙️ ";
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* ===========================
    Analysis Section
 =========================== */
 .analysis-section {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
 }
 
-.analysis-section h2 {
-    font-size: 1.4rem;
-    color: #2b59c3;
-    margin-bottom: 15px;
-    margin-top: 25px;
+.section-card h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-card h2 i {
+    color: #4299e1;
 }
 
 .reasons, .suggestions {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .reason-item, .suggestion-item {
-    background-color: #f8faff;
+    background: #f7fafc;
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.reason-item:hover, .suggestion-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    font-size: 1.2rem;
+    padding: 0.5rem;
     border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0px 3px 10px rgba(43, 89, 195, 0.1);
+    min-width: 2.5rem;
+    text-align: center;
+}
+
+.reason-item .icon {
+    background: #ebf8ff;
+    color: #3182ce;
+}
+
+.suggestion-item .icon {
+    background: #f0fff4;
+    color: #38a169;
 }
 
 .reason, .suggestion {
     margin: 0;
     font-size: 1rem;
-    color: #4b4b4b;
-    line-height: 1.5;
-}
-
-.reason {
-    border-left: 4px solid #2b59c3;
-    padding-left: 12px;
-}
-
-.suggestion {
-    border-left: 4px solid #28a745;
-    padding-left: 12px;
+    line-height: 1.6;
+    color: #4a5568;
+    flex: 1;
 }
 
 /* ===========================
    Responsive Design
 =========================== */
-@media (max-width: 600px) {
-    .container.result {
-        padding: 35px 25px;
+@media (max-width: 768px) {
+    body.result-page {
+        padding: 1rem;
     }
 
-    .container.result h1 {
+    .header-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .prediction {
         font-size: 1.6rem;
     }
 
-    .result p.prediction {
+    .section-card {
+        padding: 1.5rem;
+    }
+
+    .reason-item, .suggestion-item {
+        padding: 1rem;
+    }
+
+    .analysis-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .prediction {
         font-size: 1.4rem;
     }
 
-    .result p.probability {
+    .probability {
         font-size: 1rem;
     }
 
-    .result a {
+    .icon {
+        font-size: 1rem;
+        padding: 0.4rem;
+    }
+
+    .reason, .suggestion {
         font-size: 0.95rem;
-        padding: 10px 20px;
     }
 }

@@ -5,35 +5,70 @@
   <meta charset="UTF-8">
   <title>Prediction Result</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+  <!-- Add Font Awesome CSS from CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body class="result-page">
   <div class="container result">
-    <h1>Prediction Result</h1>
-    <p class="prediction">{{ prediction }}</p>
-    <p class="probability">Probability of Attrition: {{ probability }}</p>
-    
-    <div class="analysis-section">
-      <h2>Key Factors</h2>
-      <div class="reasons">
-        {% for reason in reasons %}
-        <div class="reason-item">
-          <p class="reason">📊 {{ reason }}</p>
+    <div class="header-section">
+      <h1><i class="fas fa-chart-column"></i> Employee Attrition Analysis</h1>
+      <div class="prediction-card">
+        <div class="prediction-header">
+          <i class="fas fa-chart-pie"></i> Prediction Result
         </div>
-        {% endfor %}
-      </div>
-      
-      <h2>HR Recommendations</h2>
-      <div class="suggestions">
-        {% for suggestion in suggestions %}
-        <div class="suggestion-item">
-          <p class="suggestion">💡 {{ suggestion }}</p>
+        <div class="prediction-content">
+          <p class="prediction {% if 'Likely' in prediction %}negative{% else %}positive{% endif %}">
+            {% if 'Likely' in prediction %}
+              <i class="fas fa-exclamation-circle"></i>
+            {% else %}
+              <i class="fas fa-check-circle"></i>
+            {% endif %}
+            {{ prediction }}
+          </p>
+          <div class="probability-gauge">
+            <div class="gauge-fill" style="width: {{ (probability|float * 100)|int }}%"></div>
+          </div>
+          <p class="probability">
+            <i class="fas fa-percentage"></i> Probability: {{ probability }}
+          </p>
         </div>
-        {% endfor %}
       </div>
     </div>
     
-    <a href="/">🔙 Back</a>
+    <div class="analysis-section">
+      <div class="section-card factors">
+        <h2><i class="fas fa-chart-line"></i> Key Factors</h2>
+        <div class="reasons">
+          {% for reason in reasons %}
+          <div class="reason-item">
+            <div class="icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <p class="reason">{{ reason }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="section-card recommendations">
+        <h2><i class="fas fa-lightbulb"></i> HR Recommendations</h2>
+        <div class="suggestions">
+          {% for suggestion in suggestions %}
+          <div class="suggestion-item">
+            <div class="icon">
+              <i class="fas fa-clipboard-check"></i>
+            </div>
+            <p class="suggestion">{{ suggestion }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    
+    <a href="/" class="back-button">
+      <i class="fas fa-arrow-left"></i> Back to Analysis
+    </a>
   </div>
 </body>
 
